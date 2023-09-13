@@ -10,7 +10,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import InsertCommentIcon from "@mui/icons-material/InsertComment";
+import AnnouncementIcon from '@mui/icons-material/Announcement';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -34,14 +34,9 @@ const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 
-  // const sidebarWidth = isCollapsed ? "64px" : "250px";
-
   return (
     <Box
       sx={{
-        // width: sidebarWidth,
-        // transition: "width 0.2s ease-in-out",
-        // overflowX: "hidden",
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -110,7 +105,7 @@ const Sidebar = () => {
                   Andrew Lee
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  STUFF
+                  Avid Tech User
                 </Typography>
               </Box>
             </Box>
@@ -135,7 +130,7 @@ const Sidebar = () => {
             <Item
               title="Feedback"
               to="/feedback"
-              icon={<InsertCommentIcon />}
+              icon={<AnnouncementIcon />}
               selected={selected}
               setSelected={setSelected}
             />
