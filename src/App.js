@@ -5,7 +5,7 @@ import Topbar from "./scenes/global/topbar.jsx";
 import Sidebar from "./scenes/global/sidebar.jsx";
 import Dashboard from "./scenes/dashboard";
 // import Portfolio from "./scenes/portfolio";
-// import MostPopular from "./scenes/mostpopular";
+import MostPopular from "./scenes/mostpopular";
 // import TopGainers from "./scenes/topgainers";
 // import BigDippers from "./scenes/bigdippers";
 // import Feedback from "./scenes/feedback";
@@ -24,7 +24,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               {/* <Route path="/portfolio" element={<Portfolio />} /> */}
-              {/* <Route path="/most_popular" element={<MostPopular />} /> */}
+              <Route path="/most_popular" element={<MostPopular />} />
               {/* <Route path="/top_gainers" element={<TopGainers />} /> */}
               {/* <Route path="/big_dippers" element={<BigDippers />} /> */}
               {/* <Route path="/feedback" element={<Feedback />} /> */}
