@@ -4,12 +4,12 @@ import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../components/Header";
 
-function MostPopular() {
+function TopGainers() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     // Use the fetch API to make the HTTP request
-    fetch("http://localhost:5001/get_mostpopular")
+    fetch("http://localhost:5001/get_topgainers")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -40,6 +40,11 @@ function MostPopular() {
     },
     { field: "symbol", headerName: "Symbol", width: 100 },
     { field: "name", headerName: "Name", width: 150 },
+    {
+      field: "price_change_percentage_24h",
+      headerName: "Change in Price (%)",
+      width: 150,
+    },
     { field: "current_price", headerName: "Price (USD)", width: 150 },
     { field: "market_cap", headerName: "Market Cap (USD)", width: 200 },
     {
@@ -47,7 +52,6 @@ function MostPopular() {
       headerName: "Circulating Supply",
       width: 200,
     },
-    { field: "total_supply", headerName: "Total Supply", width: 200 },
     // Add more columns as needed
   ];
 
@@ -60,8 +64,8 @@ function MostPopular() {
         alignItems="center"
       >
         <Header
-          title="MOST POPULAR CRYPTO"
-          subtitle="25 of the Most Popular Crypto"
+          title="TOP GAINERS"
+          subtitle="25 of the Top Gaining Crypto"
         ></Header>
       </Box>
       <Box
@@ -84,4 +88,4 @@ function MostPopular() {
   );
 }
 
-export default MostPopular;
+export default TopGainers;

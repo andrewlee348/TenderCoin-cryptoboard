@@ -45,9 +45,7 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: isCollapsed
-            ? "5px 35px 5px 23px !important"
-            : "5px 13px 5px 15px !important",
+          padding: "5px 5px 5px 5px !important",
         },
         "& .pro-inner-item:hover": {
           color: "#868dfb !important",
@@ -64,8 +62,9 @@ const Sidebar = () => {
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0px 20px 0px",
+              margin: "10px 0px 20px 20px",
               color: colors.grey[100],
+              padding: "0px",
             }}
           >
             {!isCollapsed && (
@@ -75,29 +74,32 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                {/* <Typography variant="h3" color={colors.grey[100]}>
-                  Crypto-Board
-                </Typography> */}
-                <Box textAlign="center">
+                <Box textAlign="left">
                   <Typography
                     variant="h2"
                     color={colors.grey[100]}
                     fontWeight="bold"
-                    sx={{ m: "10px 0 0 0" }}
+                    sx={{ m: "0px 0 0 0" }}
                   >
                     Crypto-Board
                   </Typography>
-                  <Typography variant="h5" color={colors.greenAccent[500]}>
+                  <Typography
+                    textAlign="center"
+                    variant="h5"
+                    color={colors.greenAccent[500]}
+                  >
                     Made by Andrew Lee
                   </Typography>
                 </Box>
+                {/* <Typography variant="h3" color={colors.grey[100]}>
+                  Replace
+                </Typography> */}
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
               </Box>
             )}
           </MenuItem>
-
           {/* USER */}
           {/* {!isCollapsed && (
             <Box mb="25px">
@@ -106,7 +108,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  onScroll={"../../assets/user.png"}
+                  onScroll={"coinGecko1.png"}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -118,15 +120,14 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Andrew Lee
+                  Crypto-Board
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Avid Tech User
+                  Made by Andrew Lee
                 </Typography>
               </Box>
             </Box>
           )} */}
-
           {/* MENU ITEMS */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item

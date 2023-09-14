@@ -4,12 +4,12 @@ import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../components/Header";
 
-function MostPopular() {
+function AllCrypto() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     // Use the fetch API to make the HTTP request
-    fetch("http://localhost:5001/get_mostpopular")
+    fetch("http://localhost:5001/get_allcrypto")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -42,12 +42,6 @@ function MostPopular() {
     { field: "name", headerName: "Name", width: 150 },
     { field: "current_price", headerName: "Price (USD)", width: 150 },
     { field: "market_cap", headerName: "Market Cap (USD)", width: 200 },
-    {
-      field: "circulating_supply",
-      headerName: "Circulating Supply",
-      width: 200,
-    },
-    { field: "total_supply", headerName: "Total Supply", width: 200 },
     // Add more columns as needed
   ];
 
@@ -60,8 +54,8 @@ function MostPopular() {
         alignItems="center"
       >
         <Header
-          title="MOST POPULAR CRYPTO"
-          subtitle="25 of the Most Popular Crypto"
+          title="ALL CRYPTO"
+          subtitle="All Validated Cryptocurrenies"
         ></Header>
       </Box>
       <Box
@@ -76,7 +70,7 @@ function MostPopular() {
           rows={data}
           columns={columns}
           pageSize={10}
-          rowsPerPageOptions={[25]}
+          rowsPerPageOptions={[10, 25, 50]}
           style={{ minHeight: "400px", maxHeight: "615px" }}
         />
       </Box>
@@ -84,4 +78,4 @@ function MostPopular() {
   );
 }
 
-export default MostPopular;
+export default AllCrypto;
