@@ -8,6 +8,20 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+// import { GoogleLogin } from "react-google-login";
+import { signInWithGoogle } from "../../firebase";
+
+// const onSignInSuccess = (response) => {
+//   // Handle the successful sign-in here
+//   console.log("Google Sign-In successful:", response);
+// };
+
+// function onSignInFailure(error) {
+//   // Your error handling logic here
+//   console.error("Sign-in failed:", error);
+// }
+
+// const clientId = "112825855644760256117.apps.googleusercontent.com";
 
 const Topbar = () => {
   const theme = useTheme();
@@ -37,14 +51,14 @@ const Topbar = () => {
             <LightModeOutlinedIcon />
           )}
         </IconButton>
-        <IconButton>
+        {/* <IconButton>
           <NotificationsOutlinedIcon />
         </IconButton>
         <IconButton>
           <SettingsOutlinedIcon />
-        </IconButton>
+        </IconButton> */}
         <IconButton>
-          <PersonOutlinedIcon />
+          <PersonOutlinedIcon onClick={signInWithGoogle} />
         </IconButton>
       </Box>
     </Box>
