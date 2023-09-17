@@ -4,6 +4,10 @@ import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../components/Header";
 
+function formatNumberWithCommas(value) {
+  return value.toLocaleString(); // Format number with commas
+}
+
 function BigDippers() {
   const [data, setData] = useState([]);
 
@@ -45,12 +49,23 @@ function BigDippers() {
       headerName: "Change in Price (%)",
       width: 150,
     },
-    { field: "current_price", headerName: "Price (USD)", width: 150 },
-    { field: "market_cap", headerName: "Market Cap (USD)", width: 200 },
+    {
+      field: "current_price",
+      headerName: "Price (USD)",
+      width: 150,
+      valueFormatter: (params) => formatNumberWithCommas(params.value),
+    },
+    {
+      field: "market_cap",
+      headerName: "Market Cap (USD)",
+      width: 200,
+      valueFormatter: (params) => formatNumberWithCommas(params.value),
+    },
     {
       field: "circulating_supply",
       headerName: "Circulating Supply",
       width: 200,
+      valueFormatter: (params) => formatNumberWithCommas(params.value),
     },
     // Add more columns as needed
   ];

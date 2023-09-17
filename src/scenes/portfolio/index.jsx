@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
@@ -8,9 +8,15 @@ import {
   setPersistence,
   browserLocalPersistence,
 } from "firebase/auth";
+import PieChart from "../../components/PieChart";
+
+function formatNumberWithCommas(value) {
+  return value.toLocaleString(); // Format number with commas
+}
 
 function Portfolio() {
   const [data, setData] = useState([]);
+  const [pieData, setPieData] = useState([]);
 
   useEffect(() => {
     // Set persistence to local
@@ -39,8 +45,15 @@ function Portfolio() {
                   holding: Math.round(value.holding * 100) / 100,
                 })
               );
-              console.log(transformedData);
+              const transformedPieData = Object.entries(data).map(
+                ([name, value]) => ({
+                  id: name,
+                  value: Math.round(value.holding * 100) / 100,
+                })
+              );
+              // console.log(transformedPieData);
               setData(transformedData);
+              setPieData(transformedPieData);
             })
             .catch((error) => {
               console.error("Error fetching data:", error);
@@ -56,11 +69,20 @@ function Portfolio() {
 
   const columns = [
     { field: "name", headerName: "Symbol", width: 100 },
-    { field: "value", headerName: "Quantity", width: 100 },
-    { field: "holding", headerName: "Amount (USD)", width: 100 },
+    {
+      field: "value",
+      headerName: "Quantity",
+      width: 150,
+      valueFormatter: (params) => formatNumberWithCommas(params.value),
+    },
+    {
+      field: "holding",
+      headerName: "Amount (USD)",
+      width: 150,
+      valueFormatter: (params) => formatNumberWithCommas(params.value),
+    },
     // Add more columns as needed
   ];
-
   return (
     <Box>
       <Box
@@ -74,23 +96,44 @@ function Portfolio() {
           subtitle="View your Kraken Portfolio"
         ></Header>
       </Box>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        ml="15px"
-        mr="15px"
-        mb="15px"
-      >
-        <DataGrid
-          rows={data}
-          columns={columns}
-          getRowId={(row) => row.name + row.value}
-          pageSize={10}
-          rowsPerPageOptions={[25]}
-          style={{ minHeight: "400px", maxHeight: "615px" }}
-        />
-      </Box>
+      <Grid container spacing={2}>
+        {/* Grid container to hold both DataGrid and PieChart */}
+        <Grid item xs={4.5}>
+          {/* Grid item for DataGrid */}
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            ml="15px"
+            mr="15px"
+            mb="15px"
+          >
+            <DataGrid
+              rows={data}
+              columns={columns}
+              getRowId={(row) => row.name + row.value}
+              pageSize={10}
+              rowsPerPageOptions={[25]}
+              style={{
+                maxWidth: "400px",
+                minHeight: "400px",
+                maxHeight: "615px",
+              }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={7.5}>
+          {/* Grid item for PieChart */}
+          <Box
+            height="75vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <PieChart data={pieData} />
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
