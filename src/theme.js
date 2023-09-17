@@ -188,6 +188,10 @@ export const themeSettings = (mode) => {
         fontFamily: ["source Sans Pro", "sans-serif"].join(","),
         fontSize: 14,
       },
+      h7: {
+        fontFamily: ["source Sans Pro", "sans-serif"].join(","),
+        fontSize: 12,
+      },
     },
   };
 };

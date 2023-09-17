@@ -3,38 +3,58 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../components/Header";
+import { getAuth } from "firebase/auth";
 
-function BigDippers() {
+function Portfolio() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
-    // Use the fetch API to make the HTTP request
-    fetch("http://localhost:5001/get_balance/<user_id>")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+    const fetchData = async () => {
+      try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+          const request = {
+            uid: user.uid,
+          };
+          const response = await axios.post(
+            "http://localhost:5001/get_balance",
+            request
+          );
+
+          if (response.status === 200) {
+            const data = response.data.result;
+            // Convert the JSON response into an array of objects
+            const transformedData = Object.entries(data).map(
+              ([name, value]) => ({
+                name: name,
+                value: value,
+              })
+            );
+            console.log(transformedData);
+            setData(transformedData);
+          } else {
+            throw new Error("Network response was not ok");
+          }
+        } else {
+          console.log("Error: Not logged in");
         }
-        return response.json();
-      })
-      .then((data) => {
-        // Convert the JSON response into an array of objects
-        const transformedData = Object.entries(data.result).map(
-          ([symbol, value]) => ({
-            name: symbol,
-            value: value,
-          })
-        );
-        console.log(transformedData);
-        setData(transformedData);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching data:", error);
-      });
+      } finally {
+        // Set loading to false whether it succeeded or failed
+        setLoading(false);
+      }
+    };
+
+    fetchData(); // Call the async fetchData function
   }, []);
 
   const columns = [
-    { field: "symbol", headerName: "Symbol", width: 100 },
-    { field: "name", headerName: "Name", width: 150 },
+    { field: "name", headerName: "Symbol", width: 100 },
+    { field: "value", headerName: "Quantity", width: 150 },
     // Add more columns as needed
   ];
 
@@ -62,6 +82,7 @@ function BigDippers() {
         <DataGrid
           rows={data}
           columns={columns}
+          getRowId={(row) => row.name + row.value}
           pageSize={10}
           rowsPerPageOptions={[25]}
           style={{ minHeight: "400px", maxHeight: "615px" }}
@@ -71,4 +92,4 @@ function BigDippers() {
   );
 }
 
-export default BigDippers;
+export default Portfolio;

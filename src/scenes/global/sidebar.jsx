@@ -151,6 +151,13 @@ const Sidebar = () => {
               Kraken Account
             </Typography>
             <Item
+              title="Api Setup"
+              to="/form"
+              icon={<ArticleIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Portfolio"
               to="/portfolio"
               icon={<ArticleIcon />}

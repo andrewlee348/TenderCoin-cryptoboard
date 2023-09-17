@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
 import {
-  confirmPasswordReset,
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
+import axios from "axios";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAGYInm2i6KE9TMMgAkdKrEkf2ieX_ZYKU",
@@ -21,13 +22,39 @@ export const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const name = result.user.displayName;
-      const email = result.user.email;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+export const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    const uid = user.uid;
+
+    // Include the uid in the request data
+    const requestData = {
+      uid: uid,
+      // other data you want to send
+    };
+
+    // Make a POST request to your backend
+    const response = await axios.post(
+      "http://localhost:5001/check_user",
+      requestData
+    );
+
+    // Handle the response as needed
+    console.log(response.data);
+
+    return true; // Successful sign-in
+  } catch (error) {
+    console.error(error);
+    return false; // Sign-in failed
+  }
+};
+
+export const signOutUser = () => {
+  try {
+    signOut(auth);
+    console.log("Sign-out successful");
+  } catch (error) {
+    console.error("Error signing out:", error);
+  }
 };
