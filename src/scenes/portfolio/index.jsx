@@ -3,58 +3,61 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../components/Header";
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 
 function Portfolio() {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
+    // Set persistence to local
+    setPersistence(getAuth(), browserLocalPersistence)
+      .then(() => {
         const auth = getAuth();
         const user = auth.currentUser;
-
         if (user) {
           const request = {
             uid: user.uid,
           };
-          const response = await axios.post(
-            "http://localhost:5001/get_balance",
-            request
-          );
-
-          if (response.status === 200) {
-            const data = response.data.result;
-            // Convert the JSON response into an array of objects
-            const transformedData = Object.entries(data).map(
-              ([name, value]) => ({
-                name: name,
-                value: value,
-              })
-            );
-            console.log(transformedData);
-            setData(transformedData);
-          } else {
-            throw new Error("Network response was not ok");
-          }
+          axios
+            .post("http://localhost:5001/get_balance", request)
+            .then((response) => {
+              if (response.status !== 200) {
+                throw new Error("Network response was not ok");
+              }
+              return response.data.result;
+            })
+            .then((data) => {
+              // Convert the JSON response into an array of objects
+              const transformedData = Object.entries(data).map(
+                ([name, value]) => ({
+                  name: name,
+                  value: value.amount,
+                  holding: Math.round(value.holding * 100) / 100,
+                })
+              );
+              console.log(transformedData);
+              setData(transformedData);
+            })
+            .catch((error) => {
+              console.error("Error fetching data:", error);
+            });
         } else {
           console.log("Error: Not logged in");
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        // Set loading to false whether it succeeded or failed
-        setLoading(false);
-      }
-    };
-
-    fetchData(); // Call the async fetchData function
+      })
+      .catch((error) => {
+        console.error("Error setting persistence:", error);
+      });
   }, []);
 
   const columns = [
     { field: "name", headerName: "Symbol", width: 100 },
-    { field: "value", headerName: "Quantity", width: 150 },
+    { field: "value", headerName: "Quantity", width: 100 },
+    { field: "holding", headerName: "Amount (USD)", width: 100 },
     // Add more columns as needed
   ];
 

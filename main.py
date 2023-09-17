@@ -111,8 +111,23 @@ def get_balance():
 
     # Query the balance using the krakenex API object
     query = k.query_private('Balance')
+    assets_data = k.query_public('Assets')
 
-    return query, 200
+    assets_mapping = {symbol: asset_info['altname'] for symbol, asset_info in assets_data['result'].items()}
+
+    # Modify the query response to change symbol values using the mapping
+    
+    modified_query = {}
+    for symbol, amount in query['result'].items():
+      price = k.query_public('Ticker', 'pair='+symbol+'ZUSD')['result'][symbol+'ZUSD']['c'][0]
+      holding = float(price) * float(amount)
+      modified_query[assets_mapping[symbol]] = {'amount': amount, 'holding': holding}
+    
+    result = {}
+    result['error'] = query['error']
+    result['result'] = modified_query
+
+    return result, 200
   except Exception as e:
     return {'error': str(e)}, 500  # Handle exceptions
 
