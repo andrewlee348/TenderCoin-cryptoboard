@@ -13,7 +13,7 @@ function BigDippers() {
 
   useEffect(() => {
     // Use the fetch API to make the HTTP request
-    fetch("http://localhost:5001/get_bigdippers")
+    fetch("https://crypto-board-1-399420.uc.r.appspot.com/get_bigdippers")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

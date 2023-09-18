@@ -13,7 +13,7 @@ function MostPopular() {
 
   useEffect(() => {
     // Use the fetch API to make the HTTP request
-    fetch("http://localhost:5001/get_mostpopular")
+    fetch("https://crypto-board-1-399420.uc.r.appspot.com/get_mostpopular")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

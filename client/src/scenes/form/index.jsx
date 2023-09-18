@@ -31,7 +31,10 @@ function MyForm() {
             api_key: values.api_key,
             api_secret: values.api_secret,
           };
-          await axios.post("http://localhost:5001/update_user", request);
+          await axios.post(
+            "https://crypto-board-1-399420.uc.r.appspot.com/update_user",
+            request
+          );
         } else {
           console.log("Error: Not logged in");
         }

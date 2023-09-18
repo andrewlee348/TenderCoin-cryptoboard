@@ -30,7 +30,10 @@ function Portfolio() {
             uid: user.uid,
           };
           axios
-            .post("http://localhost:5001/get_balance", request)
+            .post(
+              "https://crypto-board-1-399420.uc.r.appspot.com/get_balance",
+              request
+            )
             .then((response) => {
               if (response.status !== 200) {
                 throw new Error("Network response was not ok");
