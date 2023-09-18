@@ -3,7 +3,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import Topbar from "./scenes/global/topbar.jsx";
 import Sidebar from "./scenes/global/sidebar.jsx";
-import Dashboard from "./scenes/dashboard";
+// import Dashboard from "./scenes/dashboard";
 import Portfolio from "./scenes/portfolio";
 import MyForm from "./scenes/form";
 import MostPopular from "./scenes/mostpopular";
@@ -24,10 +24,10 @@ function App() {
           <main className="content">
             <Topbar />
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<AllCrypto />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/form" element={<MyForm />} />
-              <Route path="/all_crypto" element={<AllCrypto />} />
+              {/* <Route path="/all_crypto" element={<AllCrypto />} /> */}
               <Route path="/most_popular" element={<MostPopular />} />
               <Route path="/top_gainers" element={<TopGainers />} />
               <Route path="/big_dippers" element={<BigDippers />} />

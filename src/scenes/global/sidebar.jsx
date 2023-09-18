@@ -12,6 +12,7 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import AnnouncementIcon from "@mui/icons-material/Announcement";
+import WalletIcon from "@mui/icons-material/Wallet";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -97,39 +98,9 @@ const Sidebar = () => {
               </Box>
             )}
           </MenuItem>
-
-          {/* USER */}
-          {/* {!isCollapsed && (
-            <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  onScroll={"../../assets/user.png"}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
-
-              <Box textAlign="center">
-                <Typography
-                  variant="h2"
-                  color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
-                >
-                  Andrew Lee
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Avid Tech User
-                </Typography>
-              </Box>
-            </Box>
-          )} */}
-
           {/* MENU ITEMS */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+            {/* <Item
               title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
@@ -142,28 +113,7 @@ const Sidebar = () => {
               icon={<AnnouncementIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0px 5px 20px" }}
-            >
-              Kraken Account
-            </Typography>
-            <Item
-              title="Api Setup"
-              to="/form"
-              icon={<ArticleIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Portfolio"
-              to="/portfolio"
-              icon={<ArticleIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            /> */}
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -173,7 +123,7 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="All Crypto"
-              to="/all_crypto"
+              to="/"
               icon={<CurrencyBitcoinIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -196,6 +146,27 @@ const Sidebar = () => {
               title="Big Dippers"
               to="/big_dippers"
               icon={<TrendingDownIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0px 5px 20px" }}
+            >
+              Kraken Account
+            </Typography>
+            <Item
+              title="Api Setup"
+              to="/form"
+              icon={<ArticleIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Portfolio"
+              to="/portfolio"
+              icon={<WalletIcon />}
               selected={selected}
               setSelected={setSelected}
             />

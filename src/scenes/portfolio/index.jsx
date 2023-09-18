@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
@@ -17,6 +17,7 @@ function formatNumberWithCommas(value) {
 function Portfolio() {
   const [data, setData] = useState([]);
   const [pieData, setPieData] = useState([]);
+  const [totalHoldings, setTotalHoldings] = useState(0);
 
   useEffect(() => {
     // Set persistence to local
@@ -51,6 +52,11 @@ function Portfolio() {
                   value: Math.round(value.holding * 100) / 100,
                 })
               );
+              const total = transformedData.reduce(
+                (acc, currentItem) => acc + currentItem.holding,
+                0
+              );
+              setTotalHoldings(Math.round(total * 100) / 100);
               // console.log(transformedPieData);
               setData(transformedData);
               setPieData(transformedPieData);
@@ -95,6 +101,7 @@ function Portfolio() {
           title="PORTFOLIO"
           subtitle="View your Kraken Portfolio"
         ></Header>
+        <Typography variant="h6">Total Holdings: {totalHoldings}</Typography>
       </Box>
       <Grid container spacing={2}>
         {/* Grid container to hold both DataGrid and PieChart */}
