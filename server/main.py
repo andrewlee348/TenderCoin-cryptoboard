@@ -178,10 +178,5 @@ def update_user():
   except Exception as error:
     return {"error": str(error)}, 500
 
-# @app.route('/update_user', methods=['POST'])
-# def update_user():
-#   print("done")
-#   return {"message": "User data updated successfully"}, 200
-
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
