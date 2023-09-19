@@ -1,11 +1,19 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  Link,
+  useTheme,
+} from "@mui/material";
 import Header from "../../components/Header";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { tokens } from "../../theme";
 
 const validationSchema = Yup.object({
   api_key: Yup.string().required("API Key is required"),
@@ -13,7 +21,9 @@ const validationSchema = Yup.object({
 });
 
 function MyForm() {
-  const isNonMobile = useMediaQuery("(min-width:600px)");
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const formik = useFormik({
     initialValues: {
       api_key: "",
@@ -26,6 +36,7 @@ function MyForm() {
         const auth = getAuth();
         const user = auth.currentUser;
         if (user) {
+          console.log(user.uid);
           const request = {
             uid: user.uid,
             api_key: values.api_key,
@@ -53,6 +64,22 @@ function MyForm() {
         title="Kraken API Setup"
         subtitle="Enter your Kraken API Keys Below"
       />
+      <Typography variant="h5" fontWeight="bold" sx={{ m: "10px 0 0 0" }}>
+        Follow this{" "}
+        <Link
+          href="https://github.com/andrewlee348/crypto-board"
+          target="_blank"
+          variant="h5"
+          fontWeight="bold"
+          rel="noopener noreferrer"
+          color={colors.grey[100]}
+          underline="hover" // Add this property to show underline on hover
+        >
+          guide
+        </Link>{" "}
+        to set up your Kraken API keys and view your Kraken Portfolio
+        <Link to={`https://github.com/andrewlee348/crypto-board`}>this</Link>
+      </Typography>
       <Box mt="15px">
         <form onSubmit={formik.handleSubmit}>
           {" "}

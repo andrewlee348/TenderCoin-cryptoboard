@@ -24,7 +24,7 @@ function App() {
           <main className="content">
             <Topbar />
             <Routes>
-              <Route path="/" element={<AllCrypto />} />
+              <Route exact path="/" element={<AllCrypto />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/form" element={<MyForm />} />
               {/* <Route path="/all_crypto" element={<AllCrypto />} /> */}

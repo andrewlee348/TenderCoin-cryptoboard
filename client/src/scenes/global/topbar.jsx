@@ -45,23 +45,23 @@ const Topbar = () => {
 
   const handleLoginSuccess = (response) => {
     console.log("Google Sign-In successful:", response);
-    // setIsLoggedIn(true);
+    setIsLoggedIn(true);
     localStorage.setItem("isLoggedIn", "true");
   };
 
   // Function to handle login failure
   const handleLoginFailure = (error) => {
-    // setIsLoggedIn(false);
+    setIsLoggedIn(false);
     localStorage.setItem("isLoggedIn", "false");
     console.error("Google Sign-In failed:", error);
   };
 
   // Function to handle logout
-  const handleLogout = () => {
+  const handleLogout = async () => {
     console.log("Logging out...");
-    // setIsLoggedIn(false);
+    setIsLoggedIn(false);
     localStorage.setItem("isLoggedIn", "false");
-    signOutUser();
+    await signOutUser();
     window.location.reload();
   };
 
