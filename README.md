@@ -28,24 +28,28 @@ The portfolio tab should now be working and displaying your Kraken portfolio.
 ## Installation
 
 In the root directory run
-'''
+
+```
 npm install
-'''
+```
 
 Then run
-'''
+
+```
 npm run start
-'''
+```
 
 The backend was coded with Flask and the pip packages can be installed with
-'''
+
+```
 pip install -r requirements.txt
-'''
+```
 
 To start the local server, run
-'''
+
+```
 python main.py
-'''
+```
 
 ## Further improvements
 
