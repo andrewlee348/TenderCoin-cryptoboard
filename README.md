@@ -23,7 +23,7 @@ The portfolio tab should now be working and displaying your Kraken portfolio.
 
 ## Screenshot of the Kraken portfolio functionality:
 
-![alt text](https://github.com/andrewlee348/crypto-board/blob/main/images/portfolio.png?raw=true)
+![alt text](https://github.com/andrewlee348/crypto-board/blob/main/images/portfolio_image.png?raw=true)
 
 ## Installation
 
