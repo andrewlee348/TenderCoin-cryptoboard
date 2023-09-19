@@ -45,15 +45,15 @@ function TopGainers() {
     { field: "symbol", headerName: "Symbol", width: 100 },
     { field: "name", headerName: "Name", width: 150 },
     {
-      field: "price_change_percentage_24h",
-      headerName: "Change in Price (%)",
-      width: 150,
-    },
-    {
       field: "current_price",
       headerName: "Price (USD)",
       width: 150,
       valueFormatter: (params) => formatNumberWithCommas(params.value),
+    },
+    {
+      field: "price_change_percentage_24h",
+      headerName: "Change in Price (%)",
+      width: 150,
     },
     {
       field: "market_cap",
