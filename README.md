@@ -1,6 +1,6 @@
 # Crypto-Board
 
-A crypto dashboard, integrated with CoinGecko and Kraken Exchange's APIs
+A crypto dashboard, integrated with CoinGecko and Kraken Exchange's APIs  
 Deployed here: https://andrewlee348.github.io/
 
 ## How to view your Kraken portfolio
