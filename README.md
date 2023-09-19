@@ -20,9 +20,8 @@ Enter your public and private api keys in the Api Setup tab.
 
 The portfolio tab should now be working and displaying your Kraken portfolio.
 
-##
+## Screenshot of the Kraken portfolio functionality:
 
-Screenshot of the Kraken portfolio functionality:
 ![alt text](https://github.com/andrewlee348/crypto-board/blob/main/images/portfolio.png?raw=true)
 
 ## Installation
