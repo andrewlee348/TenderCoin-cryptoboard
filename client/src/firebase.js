@@ -36,7 +36,7 @@ export const signInWithGoogle = async () => {
 
     // Make a POST request to your backend
     const response = await axios.post(
-      "https://crypto-board-1-399420.uc.r.appspot.com/check_user",
+      "https://crypto-board-1-399420.uc.r.appspot.com//check_user",
       requestData
     );
 

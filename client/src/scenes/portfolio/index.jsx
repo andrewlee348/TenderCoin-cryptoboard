@@ -36,7 +36,7 @@ function Portfolio() {
           };
           axios
             .post(
-              "https://crypto-board-1-399420.uc.r.appspot.com/get_balance",
+              "https://crypto-board-1-399420.uc.r.appspot.com//get_balance",
               request
             )
             .then((response) => {

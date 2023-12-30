@@ -13,7 +13,7 @@ function AllCrypto() {
 
   useEffect(() => {
     // Use the fetch API to make the HTTP request
-    fetch("https://crypto-board-1-399420.uc.r.appspot.com/get_allcrypto")
+    fetch("https://crypto-board-1-399420.uc.r.appspot.com//get_allcrypto")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
